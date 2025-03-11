@@ -1,0 +1,5 @@
+com\igorramos\ecommerce\store\estoque.class
+com\igorramos\ecommerce\users\Usuario.class
+com\igorramos\ecommerce\Ecommerce.class
+com\igorramos\ecommerce\store\Carrinho.class
+com\igorramos\ecommerce\store\Produto.class
