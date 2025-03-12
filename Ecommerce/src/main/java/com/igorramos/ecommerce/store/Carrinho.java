@@ -8,37 +8,34 @@ public class Carrinho {
 
     private Usuario user;
     private List<Produto> produtos;
-    private Produto produto;
 
     public Carrinho(Usuario user) {
         this.user = user;
-        this.produtos = new ArrayList<Produto>();
+        this.produtos = new  ArrayList<Produto>();
     }
 
-    public void listar(){
-        for(Produto lista : produtos){
-            System.out.println(lista);
-        }
-    }
-
-    public void adCarrinho(Produto produto) {
-        produtos.add(produto);
+    public void adCarrinho(Produto p, Estoque estoque) {
+        if(estoque.verificarEstoque(p.getId(), 1)){
+            produtos.add(p);
+            estoque.removerProduto(p.getId(), 1);
+            System.out.println("Produto adicionado ao carrinho!");
+        }      
+            System.out.println("Não temos esse produto no estoque!");
     }
 
     public void remover(Produto produto) {
         produtos.remove(produto);
+        System.out.println("Produto removido com sucesso!");
+    } 
+    
+    public double calcularTotal(){
+        return produtos.stream().mapToDouble(Produto :: getPreco).sum();
     }
-
-    public void comprar(Produto produto) {
-                if (user.getSaldo() >= produto.getPreco()) {
-                    System.out.println("Compra realizada com sucesso!");
-                    user.setSaldo(user.getSaldo() - produto.getPreco());
-                    user.adHistorico(produto);
-                    produtos.remove(produto);
-                }else{
-                    System.out.println("Saldo insuficiente!");
-                }
-            }      
+    
+    public void limparCarrinho(){
+        produtos.clear();
+        System.out.println("Caarinho vazio!");
+    }
 
     public Usuario getUser() {
         return user;
@@ -55,13 +52,4 @@ public class Carrinho {
     public void setProdutos(List<Produto> produto) {
         this.produtos = produto;
     }
-
-    public Produto getProduto() {
-        return produto;
-    }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
 }

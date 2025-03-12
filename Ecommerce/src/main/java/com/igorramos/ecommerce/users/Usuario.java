@@ -1,10 +1,11 @@
 package com.igorramos.ecommerce.users;
+import com.igorramos.ecommerce.store.Pedido;
 import com.igorramos.ecommerce.store.Produto;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Usuario {
-    private List<Produto> historico;
+    private List<Pedido> historico;
     private String nome;
     private int id;
     private double saldo;
@@ -13,11 +14,11 @@ public class Usuario {
         this.nome = nome;
         this.id = id;
         this.saldo = saldo;
-        this.historico = new ArrayList<Produto>();
+        this.historico = new ArrayList<>();
     }
     
-    public void adHistorico(Produto produto){
-        this.historico.add(produto);
+    public void adHistorico(Pedido p){
+        historico.add(p);
     }
     
     public void adicionarSaldo(double deposito){
@@ -46,14 +47,5 @@ public class Usuario {
 
     public void setSaldo(double saldo) {
         this.saldo = saldo;
-    }  
-
-    public List<Produto> getHistorico() {
-        return historico;
-    }
-
-    public void setHitorico(List<Produto> historico) {
-        this.historico = historico;
-    }
-    
+    }     
 }
